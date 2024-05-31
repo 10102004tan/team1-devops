@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import About from './components/About';
+import Footer from './components/Footer';
 
 function App(props) {
   const [banners, setBanners] = useState([]);
@@ -18,7 +19,6 @@ function App(props) {
       console.log(err);
     });
   }, []);
-
   return (
     <div className="App">
       <Header />
@@ -29,6 +29,7 @@ function App(props) {
       {/* about section start */}
       <About />
       {/* about section end */}
+      <Footer/>
     </div>
   );
 }
