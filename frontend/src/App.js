@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Banner from './components/Banner';
 import About from './components/About';
 import Footer from './components/Footer';
+import Map from './components/Map';
 
 function App(props) {
   const [banners, setBanners] = useState([]);
@@ -30,6 +31,10 @@ function App(props) {
       {/* about section start */}
       <About />
       {/* about section end */}
+      {/* map section start */}
+      <Map />
+      {/* map section end */}
+      
       <Footer/>
     </div>
   );
