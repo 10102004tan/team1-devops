@@ -18,16 +18,14 @@ function App(props) {
   const [products, setProducts] = useState([])
   const [isShowMenu, setIsShowMenu] = useState(false);
   useEffect(() => {
-    fetch("http://13.211.63.187/banners")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setBanners(data)
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    fetch("http://localhost:8080/banners").then((res) => {
+      return res.json();
+    }).then((data) => {
+      console.log(data);
+      setBanners(data);
+    }).catch((err) => {
+      console.log(err);
+    });
   }, []);
 
   useEffect(() => {

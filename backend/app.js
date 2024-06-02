@@ -32,13 +32,13 @@ const CORS_WHITELIST = [
     "http://localhost:3000",
     "http://localhost:3002",
     "http://localhost:3006",
-    "http://13.236.85.112"
+    "http://localhost:3008",
 ];
 
 const corsOptions = {
     origin: "*", // Accept all origins => Development
     // origin: CORS_WHITELIST, // Accept origins in whitelist => Production
-    // optionsSuccessStatus: 200
+    optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
