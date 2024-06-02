@@ -16,11 +16,11 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
  
-# Create docker network
-docker network create devops
+ # pull the image from docker hub 
+docker pull chiendevj/demo-devops-db:latest
 
-# Run docker container DB
-docker volume create --driver local devops-db-volume
+# then run that's image
+docker run -p 3306:3306 chiendevj/demo-devops-db:last
 
 # Chay may databse
 docker run -d --name devops-db -p 3306:3306 \
