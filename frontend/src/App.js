@@ -5,6 +5,8 @@ import Banner from './components/Banner';
 import About from './components/About';
 import Footer from './components/Footer';
 import Customer from './components/Customer';
+import Map from './components/Map';
+
 
 function App(props) {
   const [banners, setBanners] = useState([]);
@@ -92,6 +94,10 @@ function App(props) {
 
       {/* COSTUMER********************************************************************************* */}
 
+      {/* map section start */}
+      <Map />
+      {/* map section end */}
+      
       <Footer/>
     </div>
   );
