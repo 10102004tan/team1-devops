@@ -1,10 +1,9 @@
 export default function Banner({ banners }) {
-    console.log("heh", banners);
     return (
         <div className="banner_section">
             <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
-                    {banners.map((banner,index ) => {
+                    {banners.map((index, banner) => {
                         return (
                             <div key={index} className={`carousel-item ${index == 0 ? " active" : ""}`}>
                                 <div className="row">
@@ -25,3 +24,4 @@ export default function Banner({ banners }) {
         </div>
     );
 }
+
