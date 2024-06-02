@@ -3,10 +3,10 @@ const cors = require('cors'); // npm install cors
 const app = express();
 const port = process.env.PORT || 3000;
 const db = require('mysql2');
-const dbHost = process.env.DB_HOST || 'ip-172-31-8-198.ap-southeast-2.compute.internal';
+const dbHost = process.env.DB_HOST || 'team1';
 const dbPort = process.env.DB_PORT || '3306';
 const dbUser = process.env.DB_USER || 'root';
-const dbPass = process.env.DB_PASS || '1234';
+const dbPass = process.env.DB_PASS || '12345';
 const dbName = process.env.DB_NAME || 'team1';
 
 const connection = db.createConnection({
@@ -36,9 +36,9 @@ const CORS_WHITELIST = [
 ];
 
 const corsOptions = {
-    // origin: "*", // Accept all origins => Development
-    origin: CORS_WHITELIST, // Accept origins in whitelist => Production
-    optionsSuccessStatus: 200
+    origin: "*", // Accept all origins => Development
+    // origin: CORS_WHITELIST, // Accept origins in whitelist => Production
+    // optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
@@ -70,6 +70,21 @@ app.get('/banners', (req, res) => {
         res.send(banners);
     });
 });
+// Contacts route
+app.get('/contacts', (req, res) => {
+    connection.query('SELECT * FROM customers', (err, rows) => {
+        if (err) throw err;
+        // Mapping dữ liệu trả về từ DB table => Response model
+        const banners = rows.map(row => {
+            return {
+                title: row.title,
+                detail: row.detail,
+                image: row.image
+            };
+        });
+        res.send(banners);
+    });
+  });
 
 app.get('/products', (req, res) => {
     connection.query('SELECT * FROM products', (err, rows) => {

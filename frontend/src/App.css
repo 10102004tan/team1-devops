@@ -451,3 +451,7 @@ button {
   border-radius: 10px;
 }
 
+
+.sidenav{
+  transition: all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
