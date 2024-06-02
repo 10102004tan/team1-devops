@@ -28,13 +28,12 @@ const connection = db.createConnection({
   });
 
 
-// const CORS_WHITELIST = [
-//     "http://localhost:3000",
-//     "http://localhost:3001",
-//     "http://localhost:3002",
-//     "http://localhost",
-//     "http://localhost:3006",
-// ];
+const CORS_WHITELIST = [
+    "http://localhost:3000",
+    "http://localhost:3002",
+    "http://localhost:3006",
+    "http://13.236.85.112"
+];
 
 const corsOptions = {
     origin: "*", // Accept all origins => Development
@@ -86,6 +85,22 @@ app.get('/contacts', (req, res) => {
         res.send(banners);
     });
   });
+
+app.get('/products', (req, res) => {
+    connection.query('SELECT * FROM products', (err, rows) => {
+        if (err) throw err;
+        const products = rows.map(row => {
+            return {
+                id: row.id,
+                name: row.name,
+                price: row.price,
+                description: row.description,
+                image: row.image
+            };
+        });
+        res.send(products);
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)

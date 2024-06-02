@@ -1,58 +1,67 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import Header from './components/Header';
-import Banner from './components/Banner';
-import About from './components/About';
-import Footer from './components/Footer';
+import { useState } from "react";
+import "./App.css";
+import { useEffect } from "react";
+import Header from "./components/Header/Header";
+import About from "./components/Product/About";
+import Contact from "./components/Product/Contact";
+import ProductList from "./components/Product/ProductList"
+import Banner from "./components/Product/Banner"
+import Footer from "./components/Product/Footer"
 import Customer from './components/Customer';
 import Map from './components/Map';
 
 
 function App(props) {
-  const [banners, setBanners] = useState([]);
-  const [customes, setCustomes] = useState([]);
 
-  // React Hook
+  const [customes, setCustomes] = useState([]);
+  const [banners, setBanners] = useState([])
+  const [products, setProducts] = useState([])
+  const [isShowMenu, setIsShowMenu] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:3000/banners").then((res) => {
-      return res.json();
-    }).then((data) => {
-      console.log(data);
-      setBanners(data);
-    }).catch((err) => {
-      console.log(err);
-    });
+    fetch("http://13.211.63.187/banners")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setBanners(data)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
   }, []);
-   // CUSTOMER**********************************************************************
-   let index = 0;
-   // React Hook
-   useEffect(() => {
-     fetch("http://localhost:3000/contacts")
-       .then((res) => {
-         return res.json();
-       })
-       .then((data) => {
-         console.log(data);
-         setCustomes(data);
-       })
-       .catch((err) => {
-         console.log(err);
-       });
-   }, []);
-   // CUSTOMER**********************************************************************
+
+  useEffect(() => {
+    fetch("http://13.211.63.187/products")
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setProducts(data)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      })
+  }, [])
+
+
+
   return (
     <div className="App">
-      <Header />
-      {banners.map((banner) => {
-        // return <Banner title={banner.title} description={banner.description} image={banner.image} />
-      })}
-      {/* <Banner title={<>Guicci <br />Kit</>} description={"The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles."}/> */}
-
+      {/* Header */}
+      <Header isShow={isShowMenu} setIsShowMenu={setIsShowMenu} />
+      {/* banner */}
+      {banners.map((banner) => (
+        <Banner title={banner.title} />
+      ))}
+      {/* end banner */}
+      {/* start our product */}
+      <ProductList products={products} />
+      {/* end our product */}
       {/* about section start */}
       <About />
       {/* about section end */}
-       {/* COSTUMER********************************************************************************* */}
-       <div className="customer_section layout_padding">
+      {/* COSTUMER********************************************************************************* */}
+      <div className="customer_section layout_padding">
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
@@ -61,7 +70,7 @@ function App(props) {
           </div>
           <div id="main_slider" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
-              {customes.map((custome) => {
+              {customes.map((index, custome) => {
                 return (
                   <Customer
                     title={custome.title}
@@ -91,16 +100,16 @@ function App(props) {
           </div>
         </div>
       </div>
-
-      {/* COSTUMER********************************************************************************* */}
-
+      {/* about section end */}
       {/* map section start */}
       <Map />
-      {/* map section end */}
-      
-      <Footer/>
+      <Contact />
+      {/*end*/}
+      {/*  footer start */}
+      <Footer />
+      {/*  footer end */}
     </div>
   );
-}
 
+}
 export default App;
