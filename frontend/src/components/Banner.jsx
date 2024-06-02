@@ -3,7 +3,7 @@ export default function Banner({ banners }) {
         <div className="banner_section">
             <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
-                    {banners.map((index, banner) => {
+                    {banners.map((banner, index) => {
                         return (
                             <div key={index} className={`carousel-item ${index == 0 ? " active" : ""}`}>
                                 <div className="row">
@@ -24,4 +24,3 @@ export default function Banner({ banners }) {
         </div>
     );
 }
-
