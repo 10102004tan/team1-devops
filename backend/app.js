@@ -3,7 +3,7 @@ const cors = require('cors'); // npm install cors
 const app = express();
 const port = process.env.PORT || 3000;
 const db = require('mysql2');
-const dbHost = process.env.DB_HOST || 'localhost';
+const dbHost = process.env.DB_HOST || 'ip-172-31-8-198.ap-southeast-2.compute.internal';
 const dbPort = process.env.DB_PORT || '3306';
 const dbUser = process.env.DB_USER || 'root';
 const dbPass = process.env.DB_PASS || '1234';
@@ -32,6 +32,7 @@ const CORS_WHITELIST = [
     "http://localhost:3000",
     "http://localhost:3002",
     "http://localhost:3006",
+    "http://13.236.85.112"
 ];
 
 const corsOptions = {
@@ -67,6 +68,22 @@ app.get('/banners', (req, res) => {
             };
         });
         res.send(banners);
+    });
+});
+
+app.get('/products', (req, res) => {
+    connection.query('SELECT * FROM products', (err, rows) => {
+        if (err) throw err;
+        const products = rows.map(row => {
+            return {
+                id: row.id,
+                name: row.name,
+                price: row.price,
+                description: row.description,
+                image: row.image
+            };
+        });
+        res.send(products);
     });
 });
 
