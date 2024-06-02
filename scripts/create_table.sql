@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `team1` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `team1` DEFAULT CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci;
 GO
 USE `team1`;
 GO
@@ -8,7 +8,7 @@ CREATE TABLE `banners` (
   `description` text NOT NULL,
   `image` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4_unicode_ci;
 
 GO
 CREATE TABLE `customers` (
