@@ -86,6 +86,22 @@ app.get('/contacts', (req, res) => {
     });
   });
 
+app.get('/products', (req, res) => {
+    connection.query('SELECT * FROM products', (err, rows) => {
+        if (err) throw err;
+        const products = rows.map(row => {
+            return {
+                id: row.id,
+                name: row.name,
+                price: row.price,
+                description: row.description,
+                image: row.image
+            };
+        });
+        res.send(products);
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 });
