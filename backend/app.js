@@ -75,14 +75,14 @@ app.get('/contacts', (req, res) => {
     connection.query('SELECT * FROM customers', (err, rows) => {
         if (err) throw err;
         // Mapping dữ liệu trả về từ DB table => Response model
-        const banners = rows.map(row => {
+        const customers = rows.map(row => {
             return {
                 title: row.title,
                 detail: row.detail,
                 image: row.image
             };
         });
-        res.send(banners);
+        res.send(customers);
     });
   });
 
