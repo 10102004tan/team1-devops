@@ -17,4 +17,5 @@
 
   # Pull and run the frontend image
   sudo docker pull 10102004tan/team1-devops-frontend:latest
-  sudo docker run -d --restart=always --name=devops-frontend -p 80:80 10102004tan/team1-devops-frontend
+  ######################################################
+  sudo docker run -d --restart=always --name=devops-frontend -p 80:80 chiendevj/team1-devops-fe

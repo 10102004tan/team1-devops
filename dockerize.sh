@@ -7,3 +7,6 @@ docker run -d --name devops-db -p 3306:3306 -v devops-db-volume:/var/lib/mysql -
 
 sudo docker exec -it devops-db bash
 mysql -uroot -p
+
+######################## final
+docker run -d --name devops-db -p 3306:3306 --hostname db.devops.tdc.edu.vn --network devops -e MYSQL_ROOT_PASSWORD="1234" -e MYSQL_USER="admin" -e MYSQL_PASSWORD="1234" -e MYSQL_DATABASE="team1" chiendevj/team1-devops-db

@@ -2,11 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
 import Header from "./components/Header/Header";
-import About from "./components/Product/About";
-import Contact from "./components/Product/Contact";
+import About from "./components/About";
 import ProductList from "./components/Product/ProductList"
-import Banner from "./components/Product/Banner"
-import Footer from "./components/Product/Footer"
+import Banner from "./components/Banner"
+import Footer from "./components/Footer"
 import Customer from './components/Customer';
 import Map from './components/Map';
 
@@ -29,7 +28,7 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    fetch("http://13.211.63.187/products")
+    fetch("http://localhost:8080/products")
       .then((res) => {
         return res.json()
       })
@@ -41,24 +40,41 @@ function App(props) {
       })
   }, [])
 
+  let index = 0;
+   // React Hook
+   useEffect(() => {
+     fetch("http://localhost:8080/contacts")
+       .then((res) => {
+         return res.json();
+       })
+       .then((data) => {
+         console.log(data);
+         setCustomes(data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   }, []);
 
 
   return (
     <div className="App">
       {/* Header */}
       <Header isShow={isShowMenu} setIsShowMenu={setIsShowMenu} />
-      {/* banner */}
-      {banners.map((banner) => (
-        <Banner title={banner.title} />
-      ))}
-      {/* end banner */}
+
+      {/* start our banner */}
+      <Banner banners={banners}/>
+      {/* end our banner */}
+
       {/* start our product */}
       <ProductList products={products} />
       {/* end our product */}
+
       {/* about section start */}
       <About />
       {/* about section end */}
-      {/* COSTUMER********************************************************************************* */}
+
+      {/* custome section start */}
       <div className="customer_section layout_padding">
         <div className="container">
           <div className="row">
@@ -68,7 +84,7 @@ function App(props) {
           </div>
           <div id="main_slider" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
-              {customes.map((index, custome) => {
+              {customes.map((custome, index) => {
                 return (
                   <Customer
                     title={custome.title}
@@ -98,12 +114,13 @@ function App(props) {
           </div>
         </div>
       </div>
-      {/* about section end */}
+      {/* custome section end */}
+
       {/* map section start */}
       <Map />
-      <Contact />
-      {/*end*/}
-      {/*  footer start */}
+      {/* map section end */}
+
+      {/* footer start */}
       <Footer />
       {/*  footer end */}
     </div>

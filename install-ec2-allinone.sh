@@ -17,7 +17,7 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
  
  # pull the image from docker hub 
-docker pull chiendevj/demo-devops-db:latest
+# docker pull chiendevj/demo-devops-db:latest
 
 # then run that's image
 docker run -p 3306:3306 chiendevj/demo-devops-db:last
